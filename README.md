@@ -3,7 +3,7 @@
 
 ADRUnity3DPrimitives provides basic primitive game objects other than box, sphere, cylinder etc. which are already provided by Unity.
 
-It is still under production. Currently only pyramid is available. The cone is finished except the UV mapping.
+It is still under production. Currently pyramid and cone are available.
 
 # How to Use
 
@@ -14,4 +14,10 @@ You can also crate a pyramid programmatically with:
 
 ```
 ADRPyramid pyramid = ADRPyramid.Create(Vector3 position, Quaternion rotation);
+```
+
+Creating a cone is very similar, just use "Game Object > Create Other > Cone". You can also create it programmatically with:
+
+```
+ADRCone pyramid = ADRCone.Create(Vector3 position, Quaternion rotation);
 ```

@@ -12,12 +12,17 @@ public class ADRPyramid : MonoBehaviour {
 
 	[HideInInspector]
 	public int baseSides = 4;
+	private int _baseSides = 4;
 
 	private static Material _defaultDiffuse = null;
 
 	void Update() {
 		if (baseSides < 3) {
 			baseSides = 3;
+			_baseSides = 3;
+			Rebuild();
+		} else if (baseSides != _baseSides) {
+			_baseSides = baseSides;
 			Rebuild();
 		}
 	}
@@ -45,7 +50,7 @@ public class ADRPyramid : MonoBehaviour {
 		float halfHeight = _height / 2;
 		Vector3[] points = new Vector3[baseSides + 1];
 		points [0] = new Vector3 (0, halfHeight, 0);
-		
+
 		int i;
 		float singleAngle = 360f / baseSides * Mathf.Deg2Rad;
 		for (i=1; i<points.Length; i++) {
@@ -96,7 +101,7 @@ public class ADRPyramid : MonoBehaviour {
 			Debug.LogError("[ADRPyramid] - MeshFilter not found!");
 			return;
 		}
-		
+
 		Mesh mesh = meshFilter.sharedMesh;
 		if (mesh == null){
 			meshFilter.mesh = new Mesh();
@@ -129,7 +134,7 @@ public class ADRPyramid : MonoBehaviour {
 		mesh.triangles = triangles;
 
 		mesh.uv = _CalculateUV ();
-		
+
 		mesh.RecalculateNormals();
 		mesh.RecalculateBounds();
 		mesh.Optimize();
